@@ -64,7 +64,7 @@ public class AgeLimitDialog extends JDialog {
         JPanel bottomPanel = new JPanel();
         add(bottomPanel, BorderLayout.PAGE_START);
         bottomPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        JLabel t=new JLabel("Age limit");
+        JLabel t = new JLabel("Age limit");
         this.limit = new JTextField("3", 6);
 
         this.limit.setPreferredSize(new Dimension(100, 20));
@@ -77,8 +77,8 @@ public class AgeLimitDialog extends JDialog {
 
         JButton setButton = new JButton("Set");
         setButton.addActionListener(e -> {
-            
-            currentLimit=Integer.parseInt(limit.getText());
+
+            currentLimit = Integer.parseInt(limit.getText());
             updateInfoText();
             tableModel.setLimitAndClear();
 
@@ -87,12 +87,12 @@ public class AgeLimitDialog extends JDialog {
         bottomPanel.add(limit);
         bottomPanel.add(setButton);
         bottomPanel.add(closeButton);
-        mainPanel.add(bottomPanel,BorderLayout.SOUTH);
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
         pack();
     }
 
     private void updateInfoText() {
-        infoLabel.setText("Age statistic for limit" + currentLimit);
+        infoLabel.setText("Age statistic for limit:" + currentLimit);
     }
 
     public void open(Frame parent) {
@@ -159,7 +159,9 @@ public class AgeLimitDialog extends JDialog {
         }
 
         private void updateData(double time, List<AnimalInfo> animals) {
-            if (animals == null) return;
+            if (animals == null) {
+                return;
+            }
             int old = 0;
             int young = 0;
             for (AnimalInfo a : animals) {
@@ -169,10 +171,11 @@ public class AgeLimitDialog extends JDialog {
                     young++;
                 }
             }
-            times.add(0,time);
-            tableData.put(time, new int[]{young, old});
-
-            fireTableDataChanged();
+            if (tableData.get(time) == null) {
+                times.add(0, time);
+                tableData.put(time, new int[]{young, old});
+                fireTableDataChanged();
+            }
         }
 
         @Override
