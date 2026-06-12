@@ -2,8 +2,9 @@
 Made by Andrés Rodríguez García & Rodrigo Álvarez Hernández
 ==================================================================================================================================================================================================================
 Necessary:
-Java 21
-Maven
+-Java 21
+-Maven.
+
 How to run the project?
 1) Clone the repository.
 2) Open the cmd in the root of the project (where the src, lib and pom are located).
